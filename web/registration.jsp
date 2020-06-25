@@ -18,36 +18,30 @@
         <h1 id="r_header">Registration</h1>
         
         <div class="con_form container w-50 p-3">
-            <form>
+            <form action="registrationcontroller" method="post">
                 <div class="form-group row">
-                  <label for="fullname" class="col-sm-2 col-form-label">Full Name</label>
+                  <label for="name" class="col-sm-2 col-form-label">Full Name</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="fullname" placeholder="fullname">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="name">
                   </div>
                  
                 </div>
                 <div class="form-group row">
                   <label for="email" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" placeholder="email">
+                      <input type="email" class="form-control" id="email"  name="email" placeholder="email">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="password" class="col-sm-2 col-form-label">Password</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" placeholder="Password">
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="address" class="col-sm-2 col-form-label">Address</label>
+                  <label for="phone" class="col-sm-2 col-form-label">phone</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="address" placeholder="address">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="nic" class="col-sm-2 col-form-label">NIC</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nic" placeholder="nic">
+                      <input type="number" class="form-control" id="phone" name="phone"placeholder="phone">
                   </div>
                 </div>
                 <div class="form-group row">

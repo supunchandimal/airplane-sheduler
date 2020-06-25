@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : Jun 20, 2020, 6:13:33 PM
-    Author     : supun chandimal
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +11,7 @@
     </head>
     <body>
         <h1 id="login_header">Login</h1>
-        <div class="con_1 container w-25 p-3" styles="     ">
+        <div class="con_1 container w-25 p-3" styles="  ">
             <form  action="logincontroller" method="post">
                <div class="form-group">
                  <label for="email">Email address</label>
@@ -28,9 +23,10 @@
                  <input type="password" class="form-control" id="password" name="password">
                </div>
                <div class="form-group form-check">
-                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
+           
+                   <a href="registration.jsp">register</a>
                </div>
+               
                <button type="submit" class="btn btn-primary">Submit</button>
             </form> 
         </div>

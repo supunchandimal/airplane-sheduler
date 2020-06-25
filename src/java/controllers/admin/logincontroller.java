@@ -58,12 +58,21 @@ public class logincontroller extends HttpServlet {
         if(user!=null){
         if(user.getRole().equals("admin")){
             System.out.println("admin");
+            //send redirect  request and response to  admin controller 
+            
+            request.getRequestDispatcher("adminpage").forward(request, response);
         }if(user.getRole().equals("customer")){
             System.out.println("customer");
+            //send redirect requst and response to customer controller 
+            request.getRequestDispatcher("customerpage").forward(request, response);
         }
         }else{
-            System.out.println("invlaid");
+            
+            // send again to login pagee
+             System.out.println("invlaid");
+           request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+        
             
     }
 
