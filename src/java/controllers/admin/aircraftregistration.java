@@ -28,6 +28,14 @@ public class aircraftregistration extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        
+        
+        
+        
+        
+        //takes the parameters from the form and assing to a new user
         aircrafts aircraft = new aircrafts();
         aircraft.setName(request.getParameter("name"));
         aircraft.setRegistrationid(request.getParameter("registrationid"));
@@ -35,22 +43,31 @@ public class aircraftregistration extends HttpServlet {
         
         registeraircrafts register = new registeraircrafts();
         
-        boolean status;
+        boolean validate = register.validateid(aircraft.getRegistrationid());
+        if(!validate){
         
-       status = register.registeraircrafts(aircraft);
+        
+        boolean status;
+        // creat a new aircraftregistration instance and add aircraft to the database
+         status = register.registeraircrafts(aircraft);
        
         System.out.println(status);
+        
+        
        
         if(status == false){
+            //if status fallse succesfully added to the database  if it is true .... fucked
             request.setAttribute("succesornot",1);
             
-            request.getRequestDispatcher("adminpage.jsp").forward(request, response);
+            request.getRequestDispatcher("aircraftcontroller").forward(request, response);
                     
         }else{
             request.setAttribute("succesornot",0);
-            request.getRequestDispatcher("adminpage.jsp").forward(request, response);
+            request.getRequestDispatcher("aircraftcontroller").forward(request, response);
         }
-        
+        }else{
+            request.getRequestDispatcher("aircraftcontroller").forward(request, response);
+        }
     }
 
     @Override
@@ -59,14 +76,6 @@ public class aircraftregistration extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**i
-     * Returns a short description of the servlet.
-     *
-     * @r/**i
-     * Returns a short description of the servlet.
-     *
-     * @eturn a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -3,6 +3,8 @@ package models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class registeraircrafts {
@@ -38,4 +40,42 @@ public class registeraircrafts {
         return status;        
     }
     
+ public static boolean validateid(String id  ){
+        aircrafts aircraft= null;
+        Connection con = null;
+        boolean status=true ;
+        
+        
+        GetConnection getconnection = new GetConnection();
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = getconnection.getCon();
+            Statement stmt= con.createStatement();
+            String Query = "SELECT * FROM aircrafts where registrationid = '" +id +"' AND delornot = 1" ;
+            ResultSet rs = stmt.executeQuery(Query);
+           
+         
+           
+            if(rs.next()){
+                status = true ;
+                System.out.println("puka");
+                
+            }else{
+                status = false;
+            }
+                  
+            
+           
+            
+        
+        }catch(Exception e){
+            System.out.println("Excetpion in  "+ e);
+        }
+        
+        
+        return status;
+    }
+     
+     
 }
