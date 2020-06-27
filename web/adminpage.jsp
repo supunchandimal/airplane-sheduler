@@ -16,7 +16,7 @@
         <!-- Side navigation -->
        <div class="sidenav">
              <a href="aircraftcontroller">Air crafts</a>
-             <a href="#">Shedule</a>
+             <a href="flightsheduleloader">Shedule</a>
 
        </div>
 

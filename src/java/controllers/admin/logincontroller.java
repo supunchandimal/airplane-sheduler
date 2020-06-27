@@ -56,6 +56,7 @@ public class logincontroller extends HttpServlet {
         user = login.getlogin(email, password);
         
         if(user!=null){
+            
         if(user.getRole().equals("admin")){
             System.out.println("admin----");
             //send redirect  request and response to  aicrft controller 
@@ -70,6 +71,7 @@ public class logincontroller extends HttpServlet {
             
             // send again to login pagee
              System.out.println("invlaid");
+             
            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         

@@ -38,20 +38,23 @@ public class createflight extends HttpServlet {
            flight.setCost(request.getParameter("cost"));
            flight.setDepairport(request.getParameter("dep"));
            flight.setAriairport(request.getParameter("ari"));
-        
+         
            
-           
-           System.out.println(flight.getFlightNo());
-           System.out.println(flight.getAridate());
-           System.out.println(flight.getAritime());
-           System.out.println(flight.getDepdate());
-           System.out.println(flight.getDeptime());
-           System.out.println(flight.getCost());
-           System.out.println(flight.getDepairport());
-           System.out.println(flight.getAriairport());
+//           
+//           System.out.println(flight.getFlightNo());
+//           System.out.println(flight.getAridate());
+//           System.out.println(flight.getAritime());
+//           System.out.println(flight.getDepdate());
+//           System.out.println(flight.getDeptime());
+//           System.out.println(flight.getCost());
+//           System.out.println(flight.getDepairport());
+//           System.out.println(flight.getAriairport());
            
            flightshedule shedule = new flightshedule();
            shedule.makeflight(flight);
+           
+           request.getRequestDispatcher("flightsheduleloader").forward(request, response);
+           
       
     }
 

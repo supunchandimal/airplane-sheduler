@@ -16,7 +16,7 @@
         <!-- Side navigation -->
        <div class="sidenav">
              <a href="aircraftcontroller">Air crafts</a>
-             <a href=" ">Shedule</a>
+             <a href="flightsheduleloader">Shedule</a>
 
        </div>
 
@@ -121,14 +121,19 @@
                       </tr>
                     </thead>
                     <tbody
-                      <c:forEach var="b" items="${aicrafts}">
+                      <c:forEach var="b" items="${shedule}">
                       <tr>
                         
-                        <td> <c:out value="${b.registrationid}"></c:out></td>
-                       <td> <c:out value="${b.name}"></c:out></td>
-                       <td> <c:out value="${b.seats}"></c:out></td>
-                       <td>    <a href="editaircrafts?id=<c:out value="${b.aircraftid}"></c:out>&state=1">edit</a> </td>
-                       <td>    <a href="editaircrafts?id=<c:out value="${b.aircraftid}"></c:out>&state=3">delete</a> </td>
+                        <td> <c:out value="${b.flightNo}"></c:out></td>
+                       <td> <c:out value="${b.depdate}"></c:out></td>
+                       <td> <c:out value="${b.aridate}"></c:out></td>
+                       <td> <c:out value="${b.deptime}"></c:out></td>
+                       <td> <c:out value="${b.aritime}"></c:out></td>
+                       <td> <c:out value="${b.depairport}"></c:out></td>
+                       <td> <c:out value="${b.ariairport}"></c:out></td>
+                       <td> <c:out value="${b.cost}"></c:out></td>
+                       <td> <a href="editflight?flightstatus=1&dbid=<c:out value="${b.dbno}"></c:out>">update</a> </td>
+                       <td> <a  href="editflight?flightstatus=2&dbid=<c:out value="${b.dbno}"></c:out>">delete</a> </td>
 
                       </tr>
                       </c:forEach>

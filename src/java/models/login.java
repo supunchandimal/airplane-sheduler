@@ -19,8 +19,10 @@ public class login {
             Statement stmt= con.createStatement();
             String Query = "SELECT * FROM users where email = '" + email+"' AND password = '"+password+"'";
             ResultSet rs = stmt.executeQuery(Query);
-            rs.next();// result set first showing the start of the tabe to and we should go to actual result 
+            // result set first showing the start of the tabe to and we should go to actual result 
             if(rs.next()){
+
+                    
                 //if  user is valid then assing to the user and send user credential 
                     user = new users();
                     user.setUserid(rs.getString("userid"));

@@ -3,6 +3,11 @@ package models;
 
 public class flight {
     
+    
+    
+    private String dbno;
+
+   
     private String flightNo;
     private String depdate;
     private String deptime;
@@ -12,6 +17,15 @@ public class flight {
     private String depairport;
     private String ariairport;
 
+    
+     public String getDbno() {
+        return dbno;
+    }
+
+    public void setDbno(String dbno) {
+        this.dbno = dbno;
+    }
+    
     public String getDepairport() {
         return depairport;
     }
