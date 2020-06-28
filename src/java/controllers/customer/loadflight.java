@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.admin;
+package controllers.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,18 +13,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.aircraftloader;
-import models.aircrafts;
+import models.flight;
+import models.flightshedule;
 
-@WebServlet(name = "aircraftcontroller", urlPatterns = {"/aircraftcontroller"})
-public class aircraftcontroller extends HttpServlet {
 
-   
+@WebServlet(name = "loadflight", urlPatterns = {"/loadflight"})
+public class loadflight extends HttpServlet {
+
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-          
+            
         }
     }
 
@@ -32,19 +33,12 @@ public class aircraftcontroller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-        //loading the aircraft to the ui
         
-        aircraftloader load = new  aircraftloader();
-        List<aircrafts> aircraft = load.loadaircrafts();
-      
-        
-        request.setAttribute("aicrafts", aircraft);
-        
-        request.getRequestDispatcher("adminpage.jsp").forward(request, response);
-               
-        
-        
+        flightshedule flight = new flightshedule();
+        List<flight> array = flight.loadaircrafts();
+       //array.get(0).getAridate();
+        request.setAttribute("shedule", array);
+        request.getRequestDispatcher("flightbooking.jsp").forward(request, response);
     }
 
     @Override
@@ -53,7 +47,7 @@ public class aircraftcontroller extends HttpServlet {
         processRequest(request, response);
     }
 
-  
+   
     @Override
     public String getServletInfo() {
         return "Short description";

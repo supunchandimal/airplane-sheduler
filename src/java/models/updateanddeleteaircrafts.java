@@ -22,9 +22,7 @@ public class updateanddeleteaircrafts {
             String Query = "SELECT * FROM aircrafts where aircraftid = '" +id+"'";
             ResultSet rs = stmt.executeQuery(Query);
             System.out.println("here");
-            rs.next();// result set first showing the start of the tabe to and we should go to actual result 
-           
-                //if  user is valid then assing to the user and send user credential 
+            rs.next();
                     aircraft = new aircrafts();
                             
                     aircraft.setAircraftid(rs.getString("aircraftid"));

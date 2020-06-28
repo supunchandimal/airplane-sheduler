@@ -15,6 +15,8 @@
     <body>
         <!-- Side navigation -->
        <div class="sidenav">
+           
+           
              <a href="aircraftcontroller">Air crafts</a>
              <a href="flightsheduleloader">Shedule</a>
 
@@ -23,12 +25,13 @@
        <!-- Page content -->
        <div class="main">
            <div class=" formcon1 container w-75" >
+               <c:out value="${aircrafterror}">${aircrafterror}</c:out>
                <form action="aircraftregistration" method="get">
                
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="registrationid">Reg no</label>
-                    <input type="text" class="form-control" id="registrationid" name="registrationid" required="required" >
+                    <input type="number" class="form-control" id="registrationid" name="registrationid" required="required" min="1000" max="9999">
                     
                   </div>
                   <div class="form-group col-md-4">
@@ -37,7 +40,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="seats">Seats</label>
-                    <input type="text" class="form-control" id="seats" name="seats" required="required">
+                    <input type="number" class="form-control" id="seats" name="seats" required="required"  max="60">
                   </div>
                 </div>
                

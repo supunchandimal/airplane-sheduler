@@ -15,14 +15,54 @@
     <body>
         <!-- Side navigation -->
        <div class="sidenav">
-             <a href="">Booking </a>
-             <a href="#">My bookings</a>
+           
+             <a href="loadflight">Booking </a>
+             
 
        </div>
 
        <!-- Page content -->
        <div class="main">
-           
+           <div  class="con2 container w-75">
+               <c:out value="${bookingmsg}">${bookingmsg}</c:out>
+
+               <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                       
+                          <th scope="col">Flight no</th>
+                        <th scope="col">Dep date</th>
+                        <th scope="col">Arr date</th>
+                         <th scope="col">Dep time </th>
+                          <th scope="col">Arr time</th>
+                          <th scope="col">Dep port</th>
+                          <th scope="col">Arr port</th>
+                          <th scope="col">cost</th>
+                           <th scope="col">available seats</th>
+                          
+                      </tr>
+                    </thead>
+                    <tbody
+                      <c:forEach var="b" items="${shedule}">
+                      <tr>
+                        
+                        <td> <c:out value="${b.flightNo}"></c:out></td>
+                       <td> <c:out value="${b.depdate}"></c:out></td>
+                       <td> <c:out value="${b.aridate}"></c:out></td>
+                       <td> <c:out value="${b.deptime}"></c:out></td>
+                       <td> <c:out value="${b.aritime}"></c:out></td>
+                       <td> <c:out value="${b.depairport}"></c:out></td>
+                       <td> <c:out value="${b.ariairport}"></c:out></td>
+                       <td> <c:out value="${b.cost}"></c:out></td>
+                       <td> <c:out value="${b.availableseats}"></c:out></td>
+                       <td> <button> <a href="bookingflight?dbid=<c:out value="${b.dbno}"></c:out>&availabelseats=<c:out value="${b.availableseats}"></c:out>">book</a></button> </td>
+                      
+
+                      </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                  </div>
        </div> 
     </body>
 </html>

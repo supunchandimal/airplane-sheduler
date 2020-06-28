@@ -16,6 +16,15 @@ public class flight {
     private String cost;
     private String depairport;
     private String ariairport;
+    private String availableseats;
+
+    public String getAvailableseats() {
+        return availableseats;
+    }
+
+    public void setAvailableseats(String availableseats) {
+        this.availableseats = availableseats;
+    }
 
     
      public String getDbno() {

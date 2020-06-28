@@ -3,23 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.admin;
+package controllers.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.aircraftloader;
-import models.aircrafts;
+import models.bookingticket;
 
-@WebServlet(name = "aircraftcontroller", urlPatterns = {"/aircraftcontroller"})
-public class aircraftcontroller extends HttpServlet {
 
-   
+@WebServlet(name = "bookingflight", urlPatterns = {"/bookingflight"})
+public class bookingflight extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -28,23 +26,28 @@ public class aircraftcontroller extends HttpServlet {
         }
     }
 
-    
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-        //loading the aircraft to the ui
-        
-        aircraftloader load = new  aircraftloader();
-        List<aircrafts> aircraft = load.loadaircrafts();
-      
-        
-        request.setAttribute("aicrafts", aircraft);
-        
-        request.getRequestDispatcher("adminpage.jsp").forward(request, response);
-               
-        
-        
+       
+       int dbid = Integer.parseInt(request.getParameter("dbid"));
+       int availabelseats = Integer.parseInt(request.getParameter("availabelseats"));
+       
+       if(availabelseats==0){
+           String  s = "All seats are full !";
+           request.setAttribute("bookingmsg", s);
+           request.getRequestDispatcher("loadflight").forward(request, response);
+       }else{
+           
+           bookingticket book = new bookingticket();
+           book.book(dbid);
+           
+           String s = "Booked";
+           request.setAttribute("bookingmsg", s);
+             request.getRequestDispatcher("loadflight").forward(request, response);
+       }
+       
     }
 
     @Override
@@ -53,7 +56,6 @@ public class aircraftcontroller extends HttpServlet {
         processRequest(request, response);
     }
 
-  
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -57,15 +57,20 @@ public class aircraftregistration extends HttpServlet {
        
         if(status == false){
             //if status fallse succesfully added to the database  if it is true .... fucked
-            request.setAttribute("succesornot",1);
+            String s  = "succesfully registerd";
+            request.setAttribute("aircrafterror",s);
             
             request.getRequestDispatcher("aircraftcontroller").forward(request, response);
                     
         }else{
-            request.setAttribute("succesornot",0);
+             String s  = "already exist";
+            request.setAttribute("aircrafterror","already exists");
             request.getRequestDispatcher("aircraftcontroller").forward(request, response);
         }
         }else{
+             String s  = "already exist";
+            request.setAttribute("aircrafterror","already exists");
+
             request.getRequestDispatcher("aircraftcontroller").forward(request, response);
         }
     }

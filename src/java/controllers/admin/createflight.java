@@ -51,9 +51,23 @@ public class createflight extends HttpServlet {
 //           System.out.println(flight.getAriairport());
            
            flightshedule shedule = new flightshedule();
-           shedule.makeflight(flight);
+          int succes =  shedule.makeflight(flight);
+          
+          if(succes==1){
+              request.setAttribute("error", "successfully created");
+              
+              request.getRequestDispatcher("flightsheduleloader").forward(request, response);
+          }else if(succes==3){
+               request.setAttribute("error", "Aircraft  already in a trip!!");
+              
+              request.getRequestDispatcher("flightsheduleloader").forward(request, response);
+          }else if(succes==0){
+              request.setAttribute("error","invalid aircraft");
+               request.getRequestDispatcher("flightsheduleloader").forward(request, response);
+              
+          }
            
-           request.getRequestDispatcher("flightsheduleloader").forward(request, response);
+           
            
       
     }

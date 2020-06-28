@@ -15,6 +15,7 @@
     <body>
         <!-- Side navigation -->
        <div class="sidenav">
+           
              <a href="aircraftcontroller">Air crafts</a>
              <a href="flightsheduleloader">Shedule</a>
 
@@ -22,14 +23,16 @@
 
        <!-- Page content -->
        <div class="main">
+
            <div class=" formcon1 container w-75" >
+               <p>   <c:out value="${error}">${error} </c:out></p>
                <h1 id="topic">Flight shedule A to B </h1>
                <form action="createflight" method="get">
                
                 <div class="form-row">
                   <div class="form-group col-md-2">
                     <label for="flightid">Flight No </label>
-                    <input type="text" class="form-control" id="flightid" name="flightid" required="fill this" >
+                    <input type="number" class="form-control" id="flightid" name="flightid" required="fill this" min="1000" max="9999">
                     
                   </div>
                   <div class="form-group col-md-2">
@@ -51,7 +54,7 @@
                   </div>
                      <div class="form-group col-md-2">
                     <label for="cost">Per Person Cost</label>
-                    <input type="text" class="form-control" id="cost" name="cost" required >
+                    <input type="number" class="form-control" id="cost" name="cost" required >
                   </div>
                     <input value="A" hidden="" name="dep" id="dep">
                     <input value="B" hidden="" name="ari" id="ari">
@@ -69,7 +72,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-2">
                     <label for="flightid">Flight No </label>
-                    <input type="text" class="form-control" id="flightid" name="flightid" required="fill this" >
+                    <input type="number" class="form-control" id="flightid" name="flightid" required="fill this" min="1000" max="9999" >
                     
                   </div>
                   <div class="form-group col-md-2">
@@ -91,7 +94,7 @@
                   </div>
                      <div class="form-group col-md-2">
                     <label for="cost">Per Person Cost</label>
-                    <input type="text" class="form-control" id="cost" name="cost" required >
+                    <input type="number" class="form-control" id="cost" name="cost" required >
                   </div>
                     <input value="B" hidden="" name="dep" id="dep">
                     <input value="A" hidden="" name="ari" id="ari">

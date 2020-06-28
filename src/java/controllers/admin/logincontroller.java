@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.users;
 
 
@@ -19,18 +20,7 @@ public class logincontroller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet logincontroller</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet logincontroller at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
+        
     }
 
   
@@ -49,7 +39,7 @@ public class logincontroller extends HttpServlet {
         String password;
         login login = new login();
         users user =new users();
-        
+         HttpSession session=request.getSession(); 
         email= request.getParameter("email");
         password = request.getParameter("password");
         System.out.println(email);
@@ -58,20 +48,30 @@ public class logincontroller extends HttpServlet {
         if(user!=null){
             
         if(user.getRole().equals("admin")){
-            System.out.println("admin----");
+            session.setAttribute("userid",001);  
+            session.setAttribute("name", "admin");
             //send redirect  request and response to  aicrft controller 
             response.sendRedirect("aircraftcontroller");
         //
         }if(user.getRole().equals("customer")){
-            System.out.println("customer");
+            //System.out.println("customer");
+            
+            
+            session.setAttribute("userid",user.getUserid());  
+            session.setAttribute("name", user.getName());
+            
             //send redirect requst and response to customer controller 
-            request.getRequestDispatcher("customerpage").forward(request, response);
+            response.sendRedirect("loadflight");
+            //request.getRequestDispatcher("loadflight").forward(request, response);
         }
         }else{
             
             // send again to login pagee
              System.out.println("invlaid");
-             
+             String s = "email or passwrod incorrect";
+             request.setAttribute("loginError",s);
+            
+             System.out.println(request.getAttribute("loginError"));
            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         

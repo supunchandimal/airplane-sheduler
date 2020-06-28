@@ -10,16 +10,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class flightshedule {
     
     
-    public boolean makeflight(flight flight){
+    public int makeflight(flight flight){
         
         boolean status=true;
+        int succes=5;
         Connection con = null;
         GetConnection getconnection = new GetConnection();
         
@@ -28,10 +32,51 @@ public class flightshedule {
             Class.forName("com.mysql.jdbc.Driver");
             con  = getconnection.getCon();
             
-            String query = "insert into flightshedule  ( flightno,depdate,deptime,aridate,aritime,depairport,ariairport,cost )"+ " values(?,?,?,?,?,?,?,?)";
+           
+            
+            Statement stmt= con.createStatement();
+            String Query = "SELECT * FROM aircrafts where registrationid = '" + flight.getFlightNo()+"' AND delornot = 1";
+            ResultSet rs = stmt.executeQuery(Query);
+         //check weather airplane  registered or not
+            if(rs.next()){
+               int seats = Integer.parseInt(rs.getString("seats"));
+              Statement stmtconfirm;
+               ResultSet rsconfirm;
+             String depdate = flight.getDepdate();
+             String deptime = flight.getDeptime();
+             String aridate = flight.getAridate();
+             String aritime = flight.getAritime();
+             
+             String dep = depdate +' '+deptime+":00";
+             String ari = aridate +' '+aritime+":00";
+             Timestamp jdbcDatetimedepature =null;
+             Timestamp jdbcDatetimearrival =null;
+
+             try{
+                 
+             java.util.Date depaturetime = new SimpleDateFormat("yyyy-MM-dd hh:mm:SS").parse(dep);
+             java.util.Date arrivaltime = new SimpleDateFormat("yyyy-MM-dd hh:mm:SS").parse(ari);
+             jdbcDatetimedepature = new Timestamp(depaturetime.getTime());
+             jdbcDatetimearrival = new Timestamp(arrivaltime.getTime());
+                 
+             
+             
+             
+                
+                
+             }catch(Exception e){
+                 System.out.println("fuk 2" +e);
+             }
+             String queryconfirm ="SELECT * FROM `flightshedule` WHERE arrivaltime>'"+jdbcDatetimedepature+"' and depaturetime<'"+jdbcDatetimedepature+"'" ;
+             stmtconfirm= con.createStatement();  
+             rsconfirm = stmtconfirm.executeQuery(queryconfirm);
+             
+             if(rsconfirm.next()){
+                 succes=3;
+             }else{
+                
+            String query = "insert into flightshedule  ( flightno,depdate,deptime,aridate,aritime,depairport,ariairport,cost,availableseatcount, depaturetime,arrivaltime  )"+ " values(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query);
-                    
-  
             ps.setString(1,flight.getFlightNo());
             ps.setString(2, flight.getDepdate());
             ps.setString(3,flight.getDeptime());
@@ -40,15 +85,28 @@ public class flightshedule {
             ps.setString(6, flight.getDepairport());
             ps.setString(7, flight.getAriairport());
             ps.setString(8, flight.getCost());
+            ps.setInt(9,seats);
+            ps.setTimestamp(10, jdbcDatetimedepature);
+            ps.setTimestamp(11, jdbcDatetimearrival);
             status = ps.execute();
-          
+           
+            
+            succes=1;
+             }
+            }else{
+                succes=0 ;
+            }
+            
+            
+            
+                    
             
             
         }catch(Exception e){
             System.out.println("Exception in register model" +e);
         }
        
-        return status;
+        return succes;
     }
     
       
@@ -83,6 +141,8 @@ public class flightshedule {
                 a.setDepairport(resultset.getString("depairport"));
                 a.setAriairport(resultset.getString("ariairport"));
                 a.setCost(resultset.getString("cost"));
+                a.setAvailableseats(resultset.getString("availableseatcount"));
+               // System.out.println(a.getAvailableseats());
                 
                 
                 arry.add(a);

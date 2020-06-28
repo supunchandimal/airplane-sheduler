@@ -11,7 +11,10 @@
     </head>
     <body>
         <h1 id="login_header">Login</h1>
+
         <div class="con_1 container w-25 p-3" styles="  ">
+            <p style="color: red"> <c:out>${loginError}</c:out></p>
+            <h4><c:out value="<%request.getAttribute("loginError");%>"></c:out></h4>
             <form  action="logincontroller" method="post">
                <div class="form-group">
                  <label for="email">Email address</label>
